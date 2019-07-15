@@ -80,7 +80,12 @@ public class ResultBo {
 
     public String get() {
         if (Objects.isNull(ipInfoPo)) {
-            return "3;3;3;3;3;3;9999;9999";
+            if (Objects.isNull(productConfigPo)) {
+                return "3;3;3;3;3;3;9999;9999";
+            } else {
+                String interval = productConfigPo.getInterval() == null ? "9999" : productConfigPo.getInterval();
+                return String.format("3;3;3;3;3;3;%s;%s", productConfigPo.getControl(), interval);
+            }
         }
         if (Objects.isNull(productConfigPo)) {
             return "2;2;2;2;2;2;9999;9999";
